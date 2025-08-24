@@ -11,14 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
 
     let isAdminLoggedIn = false;
-    const adminPassword = "FilhoAdotivo"; // <-- TROQUE A SENHA AQUI!
+    const adminPassword = "SUA_SENHA_SEGURA"; // <-- TROQUE A SENHA AQUI!
 
     const pixKey = "34999893400";
 
-    // Informações do seu repositório no GitHub (SUBSTITUA AQUI!)
-    const githubUsername = "ESIOLIMA_GITHUB"; // Seu nome de usuário
-    const githubRepo = "RIFA-EBERT_REPOSITORIO"; // Nome do seu repositório
-    const githubToken = "hp_GELqZsvtW9huqeEEFnsVMwVdFqQ7Rz2a0VT3"; // <-- COLE SEU TOKEN AQUI!
+    // Informações do seu JSONBin (SUBSTITUA AQUI!)
+    const binId = "68ab892aae596e708fd40706"; // ID da sua base de dados no JSONBin
+    const masterKey = "$2a$10$msBLA2IwLMAmGI01WpX5WeIpndA8tJnLsMshb8sGaXv/nE2aEY6Hu"; // Sua chave de acesso do JSONBin
 
     // Função para copiar a chave Pix
     const copyToClipboard = (text) => {
@@ -73,57 +72,47 @@ document.addEventListener('DOMContentLoaded', () => {
         renderRaffle();
     });
 
-    // Função para atualizar o arquivo no GitHub
+    // Função para atualizar os dados no JSONBin.io
     const updateRaffleData = async (newData) => {
-        const url = `https://api.github.com/repos/${githubUsername}/${githubRepo}/contents/rifa_data.json`;
+        const url = `https://api.jsonbin.io/v3/b/${binId}`;
         
         try {
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `token ${githubToken}`,
-                    'Accept': 'application/vnd.github.v3+json'
-                }
-            });
-            
-            const file = await response.json();
-            const sha = file.sha;
-
-            const newContent = btoa(JSON.stringify(newData, null, 2));
-
             const updateResponse = await fetch(url, {
                 method: 'PUT',
                 headers: {
-                    'Authorization': `token ${githubToken}`,
-                    'Accept': 'application/vnd.github.v3+json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': masterKey,
+                    'X-Bin-Versioning': false
                 },
-                body: JSON.stringify({
-                    message: `Número vendido: ${Object.keys(newData).find(key => newData[key].status === 'vendido')}`,
-                    content: newContent,
-                    sha: sha
-                })
+                body: JSON.stringify({ numbers: newData }) // Ajustado para a nova estrutura
             });
 
             if (updateResponse.ok) {
-                console.log('Dados atualizados com sucesso no GitHub!');
+                console.log('Dados atualizados com sucesso no JSONBin.io!');
                 renderRaffle();
             } else {
                 console.error('Erro ao atualizar o arquivo:', updateResponse.statusText);
-                alert('Erro ao atualizar o arquivo. Tente novamente ou verifique suas permissões.');
+                alert('Erro ao atualizar o arquivo. Tente novamente.');
             }
 
         } catch (error) {
-            console.error('Erro na requisição para o GitHub:', error);
-            alert('Erro de conexão com o GitHub. Verifique sua internet ou token.');
+            console.error('Erro na requisição para o JSONBin.io:', error);
+            alert('Erro de conexão com o JSONBin.io. Verifique sua internet ou chaves.');
         }
     };
 
     // Função para buscar os dados da rifa e renderizar a grade
     const renderRaffle = async () => {
         try {
-            const response = await fetch('rifa_data.json');
-            const rifaData = await response.json();
+            const url = `https://api.jsonbin.io/v3/b/${binId}`;
+            const response = await fetch(url, {
+                headers: {
+                    'X-Master-Key': masterKey
+                }
+            });
+            const data = await response.json();
+            const rifaData = data.record.numbers; // Ajustado para a nova estrutura
+
             gridContainer.innerHTML = '';
 
             let vendidosCount = 0;
@@ -162,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Erro ao carregar os dados da rifa:', error);
-            gridContainer.innerHTML = '<p>Não foi possível carregar os números da rifa. Tente novamente mais tarde.</p>';
+            gridContainer.innerHTML = '<p>Não foi possível carregar os números da rifa. Verifique se o ID e a chave do JSONBin estão corretos.</p>';
         }
     };
 
