@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pixKey = "34999893400";
 
     // Informações do seu repositório no GitHub (SUBSTITUA AQUI!)
-    const githubUsername = "SEU_USUARIO_GITHUB"; // Seu nome de usuário
-    const githubRepo = "NOME_DO_SEU_REPOSITORIO"; // Nome do seu repositório
-    const githubToken = "SEU_TOKEN_AQUI"; // <-- COLE SEU TOKEN AQUI!
+    const githubUsername = "ESIOLIMA_GITHUB"; // Seu nome de usuário
+    const githubRepo = "RIFA-EBERT"; // Nome do seu repositório
+    const githubToken = "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"; // <-- COLE SEU TOKEN AQUI!
 
     // Função para copiar a chave Pix
     const copyToClipboard = (text) => {
