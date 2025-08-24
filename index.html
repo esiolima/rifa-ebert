@@ -3,46 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa Solidária - Concorra a um Violão Tagima</title>
+    <title>Administrador da Rifa Solidária</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .login-container input {
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+        }
+        .login-container button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="header-info">
-            <h1>Rifa Solidária</h1>
-            <p>Concorra a um **Violão Tagima Mahogany Elétrico Nylon**</p>
-        </div>
-        <div class="header-price">
-            <p>Cada número vale</p>
-            <span>R$ 20,00</span>
-        </div>
-    </header>
+    <div id="login-screen" class="login-container">
+        <h2>Área do Administrador</h2>
+        <p>Insira a senha para continuar:</p>
+        <input type="password" id="password-input" placeholder="Digite a senha">
+        <button id="login-button">Entrar</button>
+    </div>
 
-    <main class="main-content">
-        <section class="buy-info">
-            <h2>Quer participar?</h2>
-            <p>Compre seu número agora mesmo!</p>
-            <div class="contact-info">
-                <p><strong>WhatsApp:</strong> [Seu WhatsApp]</p>
-                <p><strong>Instagram:</strong> [Seu Instagram]</p>
-                <p><strong>Chave para Pagamento:</strong> 34999893400</p>
-            </div>
-            <p class="raffle-date">Data do sorteio: **A definir**</p>
-        </section>
-
+    <main id="admin-content" class="main-content" style="display: none;">
         <section class="raffle-grid">
-            <h2>Números da Rifa</h2>
             <div id="grid-container" class="grid-container">
                 </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2025 Rifa Solidária. Todos os direitos reservados.</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <script src="admin.js"></script>
 
 </body>
 </html>
