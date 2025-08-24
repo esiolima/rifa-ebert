@@ -25,7 +25,7 @@ body {
 }
 
 .header-text {
-    text-align: center; /* AQUI! Centralizando o texto */
+    text-align: center;
 }
 
 .header h1 {
@@ -68,7 +68,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 30px;
-    font-size: 2.5rem;
 }
 
 .contact-link {
@@ -81,9 +80,20 @@ body {
     transform: scale(1.1);
 }
 
-.contact-link.whatsapp i { color: #25D366; }
-.contact-link.instagram i { color: #E1306C; }
-.contact-link.pix i { color: #008000; }
+.contact-icon {
+    height: 40px; /* Limita a altura dos ícones */
+    width: 40px; /* Limita a largura dos ícones */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-link.whatsapp .contact-icon { color: #25D366; font-size: 2.5rem; }
+.contact-link.instagram .contact-icon { color: #E1306C; font-size: 2.5rem; }
+.contact-link.pix img {
+    height: 100%;
+    width: auto;
+}
 .contact-link.pix { cursor: pointer; }
 
 
