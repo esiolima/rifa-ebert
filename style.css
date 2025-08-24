@@ -25,7 +25,7 @@ body {
 }
 
 .header-text {
-    text-align: left;
+    text-align: center; /* AQUI! Centralizando o texto */
 }
 
 .header h1 {
@@ -68,7 +68,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 30px;
-    font-size: 2.5rem; /* Ícones maiores */
+    font-size: 2.5rem;
 }
 
 .contact-link {
