@@ -29,7 +29,7 @@ body {
 }
 
 .header h1 {
-    font-family: 'Playfair Display', serif; /* AQUI ESTÁ A FONTE REQUINTADA */
+    font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
     color: #8B4513;
     margin-bottom: 0.5rem;
@@ -61,12 +61,13 @@ body {
 
 .guitar-image {
     max-width: 250px;
+    margin-bottom: 2rem;
 }
 
 .contact-info {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
 }
 
 .contact-link {
@@ -80,21 +81,31 @@ body {
 }
 
 .contact-icon {
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.contact-link.whatsapp .contact-icon { color: #25D366; font-size: 4.5rem; }
-.contact-link.instagram .contact-icon { color: #E1306C; font-size: 4.5rem; }
+.contact-link.whatsapp .contact-icon {
+    color: #25D366;
+    font-size: 6rem;
+}
+
+.contact-link.instagram .contact-icon {
+    color: #E1306C;
+    font-size: 6rem;
+}
+
 .contact-link.pix img {
     height: 100%;
     width: auto;
 }
-.contact-link.pix { cursor: pointer; }
 
+.contact-link.pix {
+    cursor: pointer;
+}
 
 .main-content {
     max-width: 1000px;
@@ -106,7 +117,7 @@ body {
     background-color: #fff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
