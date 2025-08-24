@@ -64,22 +64,19 @@ body {
 .contact-info {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    font-size: 1rem;
+    gap: 15px;
+    margin-top: 1.5rem;
 }
 
 .contact-link {
     text-decoration: none;
     color: #333;
     transition: transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    font-size: 1.5rem;
 }
 
 .contact-link:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .contact-link.whatsapp i { color: #25D366; }
