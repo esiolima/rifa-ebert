@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
 
     let isAdminLoggedIn = false;
-    const adminPassword = "PimentaCancadoLima";
+    const adminPassword = "PimentaCancadoLima"; // Senha alterada com sucesso!
 
     const pixKey = "34999893400";
 
     // Informações do seu JSONBin (SUBSTITUA SOMENTE ESTES DOIS VALORES!)
-    const binId = "SEU_BIN_ID_AQUI"; 
-    const masterKey = "SEU_MASTER_KEY_AQUI"; 
+    const binId = "68ab8a73d0ea881f40633902"; // ID da sua base de dados no JSONBin
+    const masterKey = "$2a$10$msBLA2IwLMAmGI01WpX5WeIpndA8tJnLsMshb8sGaXv/nE2aEY6Hu"; // Sua chave de acesso do JSONBin
 
     // Função para copiar a chave Pix
     const copyToClipboard = (text) => {
