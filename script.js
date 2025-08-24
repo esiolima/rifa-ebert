@@ -13,7 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAdminLoggedIn = false;
     const adminPassword = "SUA_SENHA_SEGURA"; // <-- TROQUE A SENHA AQUI!
 
-    const pixKey = "34999893400"; // A chave Pix para copiar
+    const pixKey = "34999893400";
+
+    // Informações do seu repositório no GitHub (SUBSTITUA AQUI!)
+    const githubUsername = "SEU_USUARIO_GITHUB"; // Seu nome de usuário
+    const githubRepo = "NOME_DO_SEU_REPOSITORIO"; // Nome do seu repositório
+    const githubToken = "SEU_TOKEN_AQUI"; // <-- COLE SEU TOKEN AQUI!
 
     // Função para copiar a chave Pix
     const copyToClipboard = (text) => {
@@ -68,6 +73,52 @@ document.addEventListener('DOMContentLoaded', () => {
         renderRaffle();
     });
 
+    // Função para atualizar o arquivo no GitHub
+    const updateRaffleData = async (newData) => {
+        const url = `https://api.github.com/repos/${githubUsername}/${githubRepo}/contents/rifa_data.json`;
+        
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `token ${githubToken}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+            
+            const file = await response.json();
+            const sha = file.sha;
+
+            const newContent = btoa(JSON.stringify(newData, null, 2));
+
+            const updateResponse = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${githubToken}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: `Número vendido: ${Object.keys(newData).find(key => newData[key].status === 'vendido')}`,
+                    content: newContent,
+                    sha: sha
+                })
+            });
+
+            if (updateResponse.ok) {
+                console.log('Dados atualizados com sucesso no GitHub!');
+                renderRaffle();
+            } else {
+                console.error('Erro ao atualizar o arquivo:', updateResponse.statusText);
+                alert('Erro ao atualizar o arquivo. Tente novamente ou verifique suas permissões.');
+            }
+
+        } catch (error) {
+            console.error('Erro na requisição para o GitHub:', error);
+            alert('Erro de conexão com o GitHub. Verifique sua internet ou token.');
+        }
+    };
+
     // Função para buscar os dados da rifa e renderizar a grade
     const renderRaffle = async () => {
         try {
@@ -76,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gridContainer.innerHTML = '';
 
             let vendidosCount = 0;
-            const totalNumbers = 200; // Altere este valor para o número total de rifas
+            const totalNumbers = 200;
             
             for (let i = 1; i <= totalNumbers; i++) {
                 const item = document.createElement('div');
@@ -98,9 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const nome = prompt(`Número ${i} - Quem comprou?`);
                             if (nome) {
                                 rifaData[i] = { status: 'vendido', comprador: nome };
-                                console.log(JSON.stringify(rifaData, null, 2));
-                                alert('Copie o JSON do console para o arquivo rifa_data.json e salve!');
-                                renderRaffle();
+                                updateRaffleData(rifaData); // Chama a nova função para atualizar
                             }
                         });
                     }
@@ -117,9 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Chamada inicial para renderizar a rifa
     renderRaffle();
-
-    // Atualiza a página a cada 30 segundos
     setInterval(renderRaffle, 30000);
 });
