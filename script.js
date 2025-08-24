@@ -1,18 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gridContainer = document.getElementById('grid-container');
-    
-    // Elementos do pop-up
+    const vendidosCounter = document.getElementById('vendidos');
+    const disponiveisCounter = document.getElementById('disponiveis');
+
     const loginModal = document.getElementById('login-modal');
     const showLoginButton = document.getElementById('show-login-modal');
+    const logoutButton = document.getElementById('logout-button');
     const closeButton = document.querySelector('.close-button');
     const passwordInput = document.getElementById('password-input');
     const loginButton = document.getElementById('login-button');
 
-    // Variável de controle do estado de login
     let isAdminLoggedIn = false;
     const adminPassword = "SUA_SENHA_SEGURA"; // <-- TROQUE A SENHA AQUI!
 
-    // Função para abrir e fechar o pop-up
+    const pixKey = "34999893400"; // A chave Pix para copiar
+
+    // Função para copiar a chave Pix
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Chave Pix copiada para a área de transferência!');
+        }).catch(err => {
+            console.error('Erro ao copiar a chave Pix: ', err);
+            alert('Erro ao copiar a chave Pix. Tente manualmente: ' + text);
+        });
+    };
+    
+    document.getElementById('copy-pix-button').addEventListener('click', () => {
+        copyToClipboard(pixKey);
+    });
+
+    // Funções para controle do modal
     showLoginButton.addEventListener('click', () => {
         loginModal.style.display = 'flex';
     });
@@ -27,17 +44,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Lógica do login
+    // Lógica de login
     loginButton.addEventListener('click', () => {
         if (passwordInput.value === adminPassword) {
             isAdminLoggedIn = true;
             loginModal.style.display = 'none';
+            showLoginButton.style.display = 'none';
+            logoutButton.style.display = 'block';
             alert('Login de administrador realizado com sucesso!');
-            renderRaffle(); // Renderiza a grade novamente com a função de administrador habilitada
+            renderRaffle();
         } else {
             alert('Senha incorreta! Tente novamente.');
             passwordInput.value = '';
         }
+    });
+
+    // Lógica de logout
+    logoutButton.addEventListener('click', () => {
+        isAdminLoggedIn = false;
+        showLoginButton.style.display = 'block';
+        logoutButton.style.display = 'none';
+        alert('Logout realizado com sucesso.');
+        renderRaffle();
     });
 
     // Função para buscar os dados da rifa e renderizar a grade
@@ -47,7 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const rifaData = await response.json();
             gridContainer.innerHTML = '';
 
-            for (let i = 1; i <= 200; i++) {
+            let vendidosCount = 0;
+            const totalNumbers = 200; // Altere este valor para o número total de rifas
+            
+            for (let i = 1; i <= totalNumbers; i++) {
                 const item = document.createElement('div');
                 item.classList.add('grid-item');
                 item.textContent = i;
@@ -59,24 +90,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     compradorNome.textContent = rifaData[i].comprador;
                     item.appendChild(document.createElement('br'));
                     item.appendChild(compradorNome);
-                    item.title = `Vendido para: ${rifaData[i].comprador}`;
+                    vendidosCount++;
                 } else {
-                    // Adiciona o evento de clique APENAS se o administrador estiver logado
                     if (isAdminLoggedIn) {
-                        item.title = `Clique para marcar como vendido`;
+                        item.classList.add('editable');
                         item.addEventListener('click', () => {
                             const nome = prompt(`Número ${i} - Quem comprou?`);
                             if (nome) {
                                 rifaData[i] = { status: 'vendido', comprador: nome };
                                 console.log(JSON.stringify(rifaData, null, 2));
                                 alert('Copie o JSON do console para o arquivo rifa_data.json e salve!');
-                                renderRaffle(); // Atualiza a visualização
+                                renderRaffle();
                             }
                         });
                     }
                 }
                 gridContainer.appendChild(item);
             }
+            
+            vendidosCounter.textContent = vendidosCount;
+            disponiveisCounter.textContent = totalNumbers - vendidosCount;
+
         } catch (error) {
             console.error('Erro ao carregar os dados da rifa:', error);
             gridContainer.innerHTML = '<p>Não foi possível carregar os números da rifa. Tente novamente mais tarde.</p>';
@@ -86,6 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Chamada inicial para renderizar a rifa
     renderRaffle();
 
-    // Atualiza a página a cada 30 segundos para mostrar os números vendidos
+    // Atualiza a página a cada 30 segundos
     setInterval(renderRaffle, 30000);
 });
