@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
 
     let isAdminLoggedIn = false;
-    const adminPassword = "PimentaCancadoLima"; // Senha alterada com sucesso!
+    const adminPassword = "PimentaCancadoLima";
 
     const pixKey = "34999893400";
 
     // Informações do seu JSONBin (SUBSTITUA SOMENTE ESTES DOIS VALORES!)
-    const binId = "68ab8a73d0ea881f40633902"; // ID da sua base de dados no JSONBin
-    const masterKey = "$2a$10$msBLA2IwLMAmGI01WpX5WeIpndA8tJnLsMshb8sGaXv/nE2aEY6Hu"; // Sua chave de acesso do JSONBin
+    const binId = "SEU_BIN_ID_AQUI"; 
+    const masterKey = "SEU_MASTER_KEY_AQUI"; 
 
     // Função para copiar a chave Pix
     const copyToClipboard = (text) => {
@@ -131,18 +131,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     item.appendChild(document.createElement('br'));
                     item.appendChild(compradorNome);
                     vendidosCount++;
-                } else {
-                    if (isAdminLoggedIn) {
-                        item.classList.add('editable');
-                        item.addEventListener('click', () => {
+                }
+
+                if (isAdminLoggedIn) {
+                    item.classList.add('editable');
+                    item.addEventListener('click', () => {
+                        if (rifaData[i] && rifaData[i].status === 'vendido') {
+                            const action = prompt(`Número ${i} - Já vendido para "${rifaData[i].comprador}". Digite 'A' para Alterar ou 'P' para Apagar:`);
+                            if (action && action.toLowerCase() === 'a') {
+                                const novoNome = prompt(`Alterar o nome do comprador do número ${i}. Digite o novo nome:`);
+                                if (novoNome) {
+                                    rifaData[i].comprador = novoNome;
+                                    updateRaffleData(rifaData);
+                                }
+                            } else if (action && action.toLowerCase() === 'p') {
+                                if (confirm(`Tem certeza que deseja apagar o nome do comprador do número ${i}?`)) {
+                                    delete rifaData[i];
+                                    updateRaffleData(rifaData);
+                                }
+                            }
+                        } else {
                             const nome = prompt(`Número ${i} - Quem comprou?`);
                             if (nome) {
                                 rifaData[i] = { status: 'vendido', comprador: nome };
                                 updateRaffleData(rifaData);
                             }
-                        });
-                    }
+                        }
+                    });
                 }
+                
                 gridContainer.appendChild(item);
             }
             
