@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
 
     let isAdminLoggedIn = false;
-    const adminPassword = "SUA_SENHA_SEGURA"; // <-- TROQUE A SENHA AQUI!
+    const adminPassword = "FilhoAdotivo"; // <-- TROQUE A SENHA AQUI!
 
     const pixKey = "34999893400";
 
