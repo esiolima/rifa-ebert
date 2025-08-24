@@ -29,6 +29,7 @@ body {
 }
 
 .header h1 {
+    font-family: 'Playfair Display', serif; /* AQUI ESTÁ A FONTE REQUINTADA */
     font-size: 2.5rem;
     color: #8B4513;
     margin-bottom: 0.5rem;
@@ -79,15 +80,15 @@ body {
 }
 
 .contact-icon {
-    height: 80px; /* ALTERADO PARA 80px */
-    width: 80px; /* ALTERADO PARA 80px */
+    height: 80px;
+    width: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.contact-link.whatsapp .contact-icon { color: #25D366; font-size: 4.5rem; } /* Tamanho ajustado para 80px */
-.contact-link.instagram .contact-icon { color: #E1306C; font-size: 4.5rem; } /* Tamanho ajustado para 80px */
+.contact-link.whatsapp .contact-icon { color: #25D366; font-size: 4.5rem; }
+.contact-link.instagram .contact-icon { color: #E1306C; font-size: 4.5rem; }
 .contact-link.pix img {
     height: 100%;
     width: auto;
@@ -111,4 +112,84 @@ body {
 
 .raffle-grid h2 {
     margin-top: 0;
-    color: #33
+    color: #333;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 8px;
+}
+
+.grid-item {
+    background-color: #e6e6e6;
+    padding: 12px 5px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: default;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.grid-item.sold {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.grid-item.editable {
+    cursor: pointer;
+}
+
+.grid-item.editable:hover {
+    background-color: #d4d4d4;
+}
+
+.grid-item.sold .comprador {
+    font-size: 0.7em;
+    font-weight: normal;
+    display: block;
+    margin-top: 3px;
+    color: #155724;
+}
+
+.status-info {
+    margin-top: 1rem;
+    display: flex;
+    gap: 20px;
+    font-size: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.status-info p {
+    margin: 0.2rem 0;
+}
+
+.status-info strong {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+/* Responsividade básica para telas menores */
+@media (max-width: 600px) {
+    .header {
+        padding: 1rem;
+    }
+    .header-main {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    }
+}
