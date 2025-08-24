@@ -60,8 +60,7 @@ body {
 
 .guitar-image {
     max-width: 250px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    /* Linhas removidas: border-radius: 8px; e box-shadow: 0 4px 12px rgba(0,0,0,0.1); */
 }
 
 .contact-info {
@@ -81,8 +80,8 @@ body {
 }
 
 .contact-icon {
-    height: 40px; /* Limita a altura dos ícones */
-    width: 40px; /* Limita a largura dos ícones */
+    height: 40px;
+    width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
