@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
 
     let isAdminLoggedIn = false;
-    const adminPassword = "PimentaCancadoLima"; // <-- TROQUE A SENHA AQUI!
+    const adminPassword = "PimentaCancadoLima"; // Senha alterada com sucesso!
 
     const pixKey = "34999893400";
 
-    // Informações do seu JSONBin (SUBSTITUA AQUI!)
-    const binId = "68ab892aae596e708fd40706"; // ID da sua base de dados no JSONBin
+    // Informações do seu JSONBin (SUBSTITUA SOMENTE ESTES DOIS VALORES!)
+    const binId = "68ab8a73d0ea881f40633902"; // ID da sua base de dados no JSONBin
     const masterKey = "$2a$10$msBLA2IwLMAmGI01WpX5WeIpndA8tJnLsMshb8sGaXv/nE2aEY6Hu"; // Sua chave de acesso do JSONBin
 
     // Função para copiar a chave Pix
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'X-Master-Key': masterKey,
                     'X-Bin-Versioning': false
                 },
-                body: JSON.stringify({ numbers: newData }) // Ajustado para a nova estrutura
+                body: JSON.stringify({ numbers: newData })
             });
 
             if (updateResponse.ok) {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             const data = await response.json();
-            const rifaData = data.record.numbers; // Ajustado para a nova estrutura
+            const rifaData = data.record.numbers;
 
             gridContainer.innerHTML = '';
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const nome = prompt(`Número ${i} - Quem comprou?`);
                             if (nome) {
                                 rifaData[i] = { status: 'vendido', comprador: nome };
-                                updateRaffleData(rifaData); // Chama a nova função para atualizar
+                                updateRaffleData(rifaData);
                             }
                         });
                     }
