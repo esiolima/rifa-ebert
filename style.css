@@ -1,0 +1,141 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.header {
+    background-color: #fff;
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #d9534f;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.header span {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.buy-info {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.buy-info h2 {
+    color: #4CAF50;
+    margin-top: 0;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 1rem;
+}
+
+.contact-info p {
+    margin: 0.5rem 0;
+    font-weight: bold;
+}
+
+.raffle-grid {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.raffle-grid h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #d9534f;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.grid-item {
+    background-color: #e6e6e6;
+    padding: 15px 5px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.grid-item:hover {
+    background-color: #d4d4d4;
+}
+
+.grid-item.sold {
+    background-color: #d4edda;
+    color: #155724;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-item.sold:hover {
+    background-color: #c3e6cb;
+}
+
+.grid-item.sold .comprador {
+    font-size: 0.8em;
+    font-weight: normal;
+    display: block;
+    margin-top: 5px;
+    color: #155724;
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+/* Responsividade básica para telas menores */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .header-price {
+        margin-top: 1rem;
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "1": {
+    "status": "vendido",
+    "comprador": "Fulano de Tal"
+  },
+  "5": {
+    "status": "vendido",
+    "comprador": "Ciclano"
+  }
+}
