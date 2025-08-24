@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('login-button');
 
     let isAdminLoggedIn = false;
-    const adminPassword = "SUA_SENHA_SEGURA"; // <-- TROQUE A SENHA AQUI!
+    const adminPassword = "FilhoAdotivo"; // <-- TROQUE A SENHA AQUI!
 
     const pixKey = "34999893400";
 
     // Informações do seu repositório no GitHub (SUBSTITUA AQUI!)
     const githubUsername = "ESIOLIMA_GITHUB"; // Seu nome de usuário
     const githubRepo = "RIFA-EBERT"; // Nome do seu repositório
-    const githubToken = "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"; // <-- COLE SEU TOKEN AQUI!
+    const githubToken = "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"; // <-- COLE SEU TOKEN AQUI!
 
     // Função para copiar a chave Pix
     const copyToClipboard = (text) => {
