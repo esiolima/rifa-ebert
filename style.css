@@ -17,10 +17,22 @@ body {
     position: relative;
 }
 
+.header-main {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 2rem;
+}
+
+.header-text {
+    text-align: left;
+}
+
 .header h1 {
     font-size: 2.5rem;
     color: #333;
     margin-bottom: 0.5rem;
+    margin-top: 0;
 }
 
 .header p {
@@ -28,51 +40,41 @@ body {
     font-size: 1rem;
 }
 
-.header span {
-    font-size: 1.5rem;
+.header-price {
+    background-color: #f0f0f0;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.header-price p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.header-price span {
+    font-size: 1.8rem;
     font-weight: bold;
     color: #d9534f;
 }
 
 .guitar-image {
     max-width: 250px;
-    margin-bottom: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.main-content {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-
-.buy-info, .raffle-grid, .status-info {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.buy-info h2 {
-    color: #4CAF50;
-    margin-top: 0;
 }
 
 .contact-info {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 1.5rem;
+    gap: 30px;
+    font-size: 2.5rem; /* Ícones maiores */
 }
 
 .contact-link {
     text-decoration: none;
     color: #333;
     transition: transform 0.2s ease;
-    font-size: 1.5rem;
 }
 
 .contact-link:hover {
@@ -85,8 +87,21 @@ body {
 .contact-link.pix { cursor: pointer; }
 
 
-.raffle-grid h2 {
+.main-content {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.raffle-grid {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     text-align: center;
+}
+
+.raffle-grid h2 {
     margin-top: 0;
     color: #333;
 }
@@ -129,9 +144,17 @@ body {
     color: #155724;
 }
 
+.status-info {
+    margin-top: 1rem;
+    display: flex;
+    gap: 20px;
+    font-size: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .status-info p {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
+    margin: 0.2rem 0;
 }
 
 .status-info strong {
@@ -152,6 +175,10 @@ body {
 @media (max-width: 600px) {
     .header {
         padding: 1rem;
+    }
+    .header-main {
+        flex-direction: column;
+        gap: 20px;
     }
     .grid-container {
         grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
